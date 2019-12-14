@@ -1,0 +1,38 @@
+Errors:
+
+===***===DONE
+
+Traceback (most recent call last):
+  File "/home/cc/ee106a/fa19/class/ee106a-aat/ros_workspaces/pacbot-code/src/maze/src/open_cv_transform.py", line 182, in <module>
+    main()
+  File "/home/cc/ee106a/fa19/class/ee106a-aat/ros_workspaces/pacbot-code/src/maze/src/open_cv_transform.py", line 162, in main
+    img, turtlebot, goal = maze.publish_once_from_queue()
+  File "/home/cc/ee106a/fa19/class/ee106a-aat/ros_workspaces/pacbot-code/src/maze/src/open_cv_transform.py", line 115, in publish_once_from_queue
+    goal_transformed_pos = np.matmul(cam_matrix,self.goal_pos)
+TypeError: Object arrays are not currently supported
+
+===***===DONE
+
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2920: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/usr/local/lib/python2.7/dist-packages/numpy/core/_methods.py:78: RuntimeWarning: invalid value encountered in true_divide
+  ret, rcount, out=ret, casting='unsafe', subok=False)
+Lookup would require extrapolation into the past.  Requested time 1575868946.116096258 but the earliest data is at time 1575868947.116029501, when looking up transform from frame [ar_marker_1] to frame [base_link]
+Traceback (most recent call last):
+  File "/home/cc/ee106a/fa19/class/ee106a-aat/ros_workspaces/pacbot-code/src/maze/src/open_cv_transform.py", line 182, in <module>
+    main()
+  File "/home/cc/ee106a/fa19/class/ee106a-aat/ros_workspaces/pacbot-code/src/maze/src/open_cv_transform.py", line 162, in main
+    img, turtlebot, goal = maze.publish_once_from_queue()
+  File "/home/cc/ee106a/fa19/class/ee106a-aat/ros_workspaces/pacbot-code/src/maze/src/open_cv_transform.py", line 137, in publish_once_from_queue
+    self.maze_pub.publish(self.maze)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 886, in publish
+    raise ROSSerializationException(str(e))
+rospy.exceptions.ROSSerializationException: field occupancy_grid must be a list or tuple type
+
+===***===DONE
+
+When the robot covers a corner: ...
+
+===***===DONE
+
+The static transform is not stable: the base_link flips up from the bottom
