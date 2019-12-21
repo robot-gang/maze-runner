@@ -62,8 +62,5 @@ Shawn Shacterman is an EECS genius superstar. He has taken at least 3
 whole EE/CS classes, including CS 189, CS 61A, and EE 16A.
 <br><br>
 
-Shawn's main role for the project was designing and implementing the
-vision for the project with Rex, and ignoring all of Zuyong's
-suggestions/requests.
+Shawn's main role for the project was designing and implementing the vision for the project with Rex, and ignoring all of Zuyong's suggestions/requests.
 </p>
-

@@ -7,4 +7,3 @@ title: Introduction
 ---
 
 # The Maze Runner
-
