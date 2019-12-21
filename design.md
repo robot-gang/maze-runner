@@ -39,74 +39,32 @@ When we initially went about designing this project, we wanted to be super lazy 
 [(back to top)](#table-of-contents)
 
 # Our Design and Decisions
+One of the most significant design choices our group made was using grid-based planning, along with variable positions and orientations for our camera. This meant that the computer vision needed to be able to simulate a top-down view of the maze. As a result our design focused heavily on robust corner detection. We also noticed that sometimes the Turtlebot would obscure parts of the maze from the camera's perspective, so we needed a way for vision to deal with that.
 
-The system for the computer vision is quite complicated, so a general outline of the system is provided to make it more readable.
-1. Segment image using color thresholding to get the walls of the maze.
-    - Thresholds for colors picked through trial and error.
-    - Works best if the markers contrast strongly with everything else in the camera view.
-    - Apply morphological transform in Opencv to remove noise in image.
-2. Assume maze is going to be bounded by bounded by a well-formed rectangle.
-    - Not strictly necessary in that only the pieces of paper corresponding to the rectangle's corners need to exist.
-    - If there are boundaries, however, they need to be relatively straight and not too spaced apart ideally.
-3. Detect potential clusters of corners in segmented image, and refine them to get corner pixels.
-4. Use K-means clustering on convex hull of corners to separate points into four groupings.
-    - Depending on the angle of the camera, the shape of the maze can look like a trapezoid, parallelogram, rectangle, etc.
-    - Depending on distance of camera to the maze, maze can also be translated.
-    - Difficult to find a good method to classify outermost corners of maze after classification.
-    - Becomes easier to find a method if we only consider clusters in a local region.
-    - K-means allows a flexible way to split the maze into four quadrants, regardless of the camera's position or orientation.
+As a result, we put a lot of emphasis in detecting the corners of the maze, segmenting the maze, segmenting the turtlebot, and segmenting the AR Tag on top of the Turtlebot.
 
-    <center><img src="assets/design/kmeans.png" width="75%"></center>
-    *<center><sub><sup>Illustration of how effective K-means is at splitting maze.</sup></sub></center>*
-
-5. In each cluster, pick point that is furthest away from center of convex hull of points.
-    - somewhat problematic but works most of the time.
-6. Have (ideally) found four corners of a rectangle, apply median filter to corners to reduce chance of outliers.
-7. Find maximum bounding rectangle
-8. Retrieve perspective transform matrix, and apply to segmented image and original image.
-9. Segment turtlebot in the transformed original image.
-    - Use color thresholding on turtlebot (black for base and whatever color the Turtlebot is)
-    - Segment AR Tag on turtlebot by calculating corners of tag in AR tag frame, transforming to camera frame, transforming to pixel space, transforming to warped pixel space, and then drawing a rotated rectangle contour around corners using OpenCV.
-10. Overlay segmented Turtlebot with segmented maze.
-11. Downsample image to get 2D-grid for path planning.
-12. Assign walls a 1, open space a 0, and the region covered by the Turtlebot as a 2 (internally).
-13. Compare to internalized grid (initially all 2s).
-14. Only only change internal grid points' values if new corresponding grid point is a 1 or 0
-    - If turtlebot drives and blocks a portion of the maze we knew prior, safest to assume it does not change as the Turtlebot blocks it from the camera's view.
-    - If Turtlebot moves and no longer blocks part of the maze, we now know what that that part of the maze looks like, and there is not reason to make it uncertain.
-    - Only change maze if someone alters the walls.
-15. Publish uncertain regions as 1 (wall). 
-    - Requires large assumption
-16. Get pixel position of goal, base of Turtlebot, and AR tag on turtlebot using TF and applying camera intrinsic matrix.
-17. Get transform between Turtlebot and Goal using TF.
-18. Publish updated internal grid, pixel positions, and Transformations
-
-
-Explain general process for vision
-Notable things to talk about
-K-Means to find corners
-Segment turtlebot/AR tag 
-Median Filter corners
+We also needed pixel positions of the goal, the AR Tag on the Turtlebot, and the base of the Turtlebot, but these were fairly easy to get using the TF package in ROS.
 
 
 [(back to top)](#table-of-contents)
 
 # Design choices and trade-offs
+A problem during the corner detection of the maze that we struggled with was determining how to find the points that defined the bounding rectangle of our maze. Depending on the angle of the camera, the shape of the maze could look like a trapezoid, parallelogram, rectangle, etc. Additionally, depending on distance of the camera to the maze, the maze could be off-center in the camera perspective. It became difficult to find a good method to classify outermost corners of maze after classification.
+Through some experimentation, we found that it became easier to find a method if we only considered clusters in a local region. K-means allows a flexible way to split the maze into four quadrants, regardless of the camera's position or orientation.
 
-Motivate decision to use grid-based planning
-Motivate decision to use perspective
-Trade off in updating corners
-Explain trade off with speed vs robustness
+<center><img src="assets/design/kmeans.png" width="75%"></center>
+*<center><sub><sup>Illustration of how effective K-means is at splitting maze.</sup></sub></center>*
+
+After finding these local regions, we took the points in each cluster and took the one with the maximum distance to the centroid of the outer corner points (forming the convex hull) as the outermost corner. Afterwards we sorted them based on x,y position to determine which corner we had. While this worked well most of the time, if the detected corners were weirdly imbalanced (like in the above picture), the point of comparison is not great. However, this method did work well most of the time.
+
+Sometimes our method of corner detection was not perfect, and the vision would randomly become disturbed by noise in the image (from lighting or if someone walked in front of the camera). After that we decided to use a median filter on the corners to prevent random outliers from being too prevalent in the perspective shifting. This led to a tradeoff, in how quickly/often the corners would update versus how stable they were. If the camera shifted randomly (someone bumped into it), it could take a while for the corner points to change.
 
 
 [(back to top)](#table-of-contents)
 
 # Analysis of Design
 
-Discuss strengths and limitations of current design
--> need all four corners
--> no easy way to track rotations
--> gridding is very naive, should use probabilistic model
+Overall, our design for the vision was fairly reliable. You could pick up the camera and move it around, and it would still accurately output a grid, pixel positions, and transforms between the Turtlebot with respect to the goal. Something we did not have time to accont for, however, was if the Turtlebot obscured one of the corners of the maze. We also did not manage to make the control work with a moving camera. Vision would generally always publish a correct maze, but if you moved the camera around the maze, the corners flip and the grid rotates. This messes up some assumptions in control. We tried to always have the maze publish at a fixed orientation in vision, but keeping track of the orientation was too unreliable. Finally our method of gridding, though it worked well most of the time, was very naive, and we should have employed a probabilistic model that control could take advantage of.
 
 
 [(back to top)](#table-of-contents)
