@@ -3,14 +3,13 @@ layout: page
 title: Conclusion
 permalink: /conclusion
 ---
-# How well did your finished solution meet your design criteria?
 
-* Original goals
+* Our original goals:
     * Have robots reliably actuate and interact with each other in a dynamic environment
     * Implement an accurate vision and path-planning algorithm given a top-down view of the environment
     * Use SLAM to search for a target in a complicated maze
 
-* What we achieved
+* What we achieved:
     * The TurtleBot can move to the goal position from a random position and orientation in a maze.
     * Camera that provides the vision for the TurtleBot does not require to be on top of the maze, also can be at an angled position
     * TurtleBot can find its goal correctly even if we change the goal after it starts moving
@@ -25,14 +24,14 @@ After actually starting doing the project, we realized that we won't have enough
 
 2. We also noticed that sometimes base_link flip randomly.
 
-<iframe width="720" height="480" src="https://www.youtube.com/embed/SF1i_vUWl2g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe style="margin-bottom: 50px" width="720" height="480" src="https://www.youtube.com/embed/SF1i_vUWl2g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Not entirely sure why this was happening, but sometimes adjusting the AR tag position prevented this happening.
+    Not entirely sure why this was happening, but sometimes adjusting the AR tags position prevented this happening. Possibly, the reason is because of the reflection of the light on the TurtleBot, so we decided to make bigger AR tags to cover the top of the TurtleBot.
 
-# Improvements if we had additional time
+## Improvements if we had more time
 
 1. Introducing another TurtleBot as an adversary to the first TurtleBot.
-2. Making the dynamic controller more robust  
+2. Making the dynamic controller more robust
 3. Make corners more robust to lighting changes using some adaptive contrast algorithm.
 4. Make pixel of TurtleBot (base link) position robust to glitches in ar_track_alvar.
 5. Make maze publishing accurate even if TurtleBot covers parts of the maze for a period of time.
