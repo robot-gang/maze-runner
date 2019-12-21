@@ -1,10 +1,15 @@
 ---
 layout: page
-title: implementation
+title: Implementation
 permalink: /implementation
 ---
 
+## Overview the whole pipeline
+
+<img align="center" src="assets/system-diagram.jpg">
+
 ## Vision
+
 There were two AR tags, one will be on the TurtleBot, the other one will put in the maze. With the help of the camera on the side to provide information of the maze and the position of the TurtleBot and the goal by using both AR tags.
 
 <center><img src="assets/implementation/camera_provided_img.png" width="100%"></center>
@@ -39,6 +44,7 @@ We preprocessed the path return by A* such that it only contained the turning po
 
 
 ## Control
+
 At turning points, we calculated the angle difference between the current state (x, y, ɵ) to the desired angle. Current angle with respect to the fixed from is obtained from look_up_transfrom from tf package. The desired angle is calculated from based on the path.
 The twist published only contains angular velocity K<sub>z</sub> &Delta;&theta;
 
