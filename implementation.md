@@ -16,6 +16,7 @@ permalink: /implementation
 
 There were two AR tags, one will be on the TurtleBot, the other one will put in the maze. With the help of the camera on the side to provide information of the maze and the position of the TurtleBot and the goal by using both AR tags.
 
+
 <p style="margin-bottom: 10px">
 <center><img src="assets/implementation/camera_provided_img.png" width="100%"></center>
 </p>
@@ -24,42 +25,64 @@ There were two AR tags, one will be on the TurtleBot, the other one will put in 
 Using the image provided by the camera, we transformed it into a binary image.
 </p>
 
-<p style="margin-bottom: 10px">
-<center><img src="assets/implementation/binary_img.png" width="100%"></center>
-</p>
+1. Segment image using color thresholding to get the walls of the maze.
+    - Thresholds for colors picked through trial and error.
+    - Works best if the markers contrast strongly with everything else in the camera view.
+    - Apply morphological transform in Opencv to remove noise in image.
 
-<p style="margin-bottom: 10px">
-The binary image made it easier to detect corners of the maze,
-and then using OpenCV transform the image to a top down view.
-</p>
+    <p style="margin-bottom: 10px">
+    <center><img src="assets/implementation/binary_img.png" width="100%"></center>
+    </p>
 
-<p style="margin-bottom: 10px">
-<center><img src="assets/implementation/actual_corners.png" width="100%"></center>
-</p>
+2. Assume maze is going to be bounded by bounded by a well-formed rectangle.
+    - Not strictly necessary in that only the pieces of paper corresponding to the rectangle’s corners need to exist.
+    - If there are boundaries, however, they need to be relatively straight and not too spaced apart.
+3. Detect potential clusters of corners in segmented image, and refine them to get corner pixels.
 
-<p style="margin-bottom: 10px">
-We also used static transform to provide the actual position of the
-TurtleBot(the "base_link") since the AR tag is on the TurtleBot.
-</p>
+    <p style="margin-bottom: 10px">
+    <center><img src="assets/implementation/actual_corners.png" width="100%"></center>
+    </p>
 
-<p style="margin-bottom: 10px">
-As shown below, the blue dot is the position of the goal AR tag, and the red
-dot is the postion of the TurtleBot.
-</p>
+4. Use K-means clustering on convex hull of corners to separate points into four groupings.
+    - Depending on the angle of the camera, the shape of the maze can look like a trapezoid, parallelogram, rectangle, etc.
+    - Depending on distance of camera to the maze, maze can also be translated.
+    - Difficult to find a good method to classify outermost corners of maze after classification.
+    - Becomes easier to find a method if we only consider clusters in a local region.
+    - K-means allows a flexible way to split the maze into four quadrants, regardless of the camera’s position or orientation.
+5. In each cluster, pick point that is furthest away from center of convex hull of points.
 
-<p style="margin-bottom: 10px">
-<center><img src="assets/implementation/transformed_maze.png" width="100%"></center>
-</p>
+    <center><img src="assets/design/kmeans.png" width="75%"></center>
 
-<p style="margin-bottom: 10px">
-Lastly, by downsampling to the grid size, we made the maze into grids, and we
-used an array to represent the maze. Publish the maze array, the goal position,
-and the TurtleBot position to the controller.
-</p>
+6. Have (ideally) found four corners of a rectangle, apply median filter to corners to reduce chance of outliers.
+7. Find maximum bounding rectangle
+8. Retrieve perspective transform matrix, and apply to segmented image and original image.
+9. Segment turtlebot in the transformed original image.
+    - Use color thresholding on turtlebot (black for base and whatever color the Turtlebot is)
+    - Segment AR Tag on turtlebot by calculating corners of tag in AR tag frame, transforming to camera frame, transforming to pixel space, transforming to warped pixel space, and then drawing a rotated rectangle contour around corners using OpenCV.
+10. Overlay segmented Turtlebot with segmented maze.
 
-<p style="margin-bottom: 10px">
-<center><img src="assets/implementation/downsampled_maze.png" width="100%"></center>
-</p>
+    <p style="margin-bottom: 10px">
+    <center><img src="assets/implementation/transformed_maze.png" width="100%"></center>
+    </p>
+
+11. Downsample image to get 2D-grid for path planning.
+12. Assign walls a 1, open space a 0, and the region covered by the Turtlebot as a 2 (internally).
+    - Compare to internalized grid (initially all 2s).
+    - Only change internal grid points’ values if new corresponding grid point is a 1 or 0
+    - If turtlebot drives and blocks a portion of the maze we knew prior, safest to assume it does not change as the Turtlebot blocks it from the camera’s view.
+    - If Turtlebot moves and no longer blocks part of the maze, we now know what that that part of the maze looks like, and there is not reason to make it uncertain.
+    - Only change maze if someone alters the walls.
+13. Publish uncertain regions as 1 (wall).
+    - Assume turtlebot will not initially cover optimal path (can deal with this but ran out of time)
+    <p style="margin-bottom: 10px">
+    <center><img src="assets/implementation/downsampled_maze.png" width="100%"></center>
+    </p>
+
+14. Get pixel position of goal, base of Turtlebot, and AR tag on turtlebot using TF and applying camera intrinsic matrix.
+15. Get transform between Turtlebot and Goal using TF.
+16. Publish updated internal grid, pixel positions, and Transformations
+
+
 
 [(back to top)](#table-of-contents)
 
