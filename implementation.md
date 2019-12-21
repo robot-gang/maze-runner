@@ -18,12 +18,14 @@ There were two AR tags, one will be on the TurtleBot, the other one will put in 
 
 
 <p style="margin-bottom: 10px">
-<center><img src="assets/implementation/camera_provided_img.png" width="100%"></center>
+<center><img src="assets/implementation/camera_provided_img.png" width="75%"></center>
 </p>
 
 <p style="margin-bottom: 10px">
-Using the image provided by the camera, we transformed it into a binary image.
+Using the image provided by the camera, we transform it into a binary image.
 </p>
+
+IMPORTANT NOTE: The images here were captured before the segmentation of the AR Tag was completed, so the turtlebot will have a large unsegmented portion in these images. If you want to see that this works, check the last video on our results page. 
 
 1. Segment image using color thresholding to get the walls of the maze.
     - Thresholds for colors picked through trial and error.
@@ -31,7 +33,7 @@ Using the image provided by the camera, we transformed it into a binary image.
     - Apply morphological transform in Opencv to remove noise in image.
 
     <p style="margin-bottom: 10px">
-    <center><img src="assets/implementation/binary_img.png" width="100%"></center>
+    <center><img src="assets/implementation/binary_img.png" width="75%"></center>
     </p>
 
 2. Assume maze is going to be bounded by bounded by a well-formed rectangle.
@@ -40,7 +42,7 @@ Using the image provided by the camera, we transformed it into a binary image.
 3. Detect potential clusters of corners in segmented image, and refine them to get corner pixels.
 
     <p style="margin-bottom: 10px">
-    <center><img src="assets/implementation/actual_corners.png" width="100%"></center>
+    <center><img src="assets/implementation/actual_corners.png" width="75%"></center>
     </p>
 
 4. Use K-means clustering on convex hull of corners to separate points into four groupings.
@@ -62,7 +64,7 @@ Using the image provided by the camera, we transformed it into a binary image.
 10. Overlay segmented Turtlebot with segmented maze.
 
     <p style="margin-bottom: 10px">
-    <center><img src="assets/implementation/transformed_maze.png" width="100%"></center>
+    <center><img src="assets/implementation/transformed_maze.png" width="75%"></center>
     </p>
 
 11. Downsample image to get 2D-grid for path planning.
@@ -75,7 +77,7 @@ Using the image provided by the camera, we transformed it into a binary image.
 13. Publish uncertain regions as 1 (wall).
     - Assume turtlebot will not initially cover optimal path (can deal with this but ran out of time)
     <p style="margin-bottom: 10px">
-    <center><img src="assets/implementation/downsampled_maze.png" width="100%"></center>
+    <center><img src="assets/implementation/downsampled_maze.png" width="75%"></center>
     </p>
 
 14. Get pixel position of goal, base of Turtlebot, and AR tag on turtlebot using TF and applying camera intrinsic matrix.
@@ -90,11 +92,11 @@ Using the image provided by the camera, we transformed it into a binary image.
 
 We used A* to find the shortest path from the start position to the end position
 
-<center><img src="assets/implementation/path_1.png" width="100%"></center>
+<center><img src="assets/implementation/path_1.png" width="75%"></center>
 
 We preprocessed the path return by A* such that it only contained the turning points.
 
-<center><img src="assets/implementation/path_2.png" width="100%"></center>
+<center><img src="assets/implementation/path_2.png" width="75%"></center>
 
 [(back to top)](#table-of-contents)
 
@@ -107,14 +109,14 @@ The twist published only contains angular velocity K<sub>z</sub> &Delta;&theta;
 
 &Delta;&theta; = &theta;<sub>d</sub> - &theta;<sub>0</sub>
 
-<center><img src="assets/implementation/control_1.png" width="100%"></center>
+<center><img src="assets/implementation/control_1.png" width="75%"></center>
 
 Between turning points, the main motion was translation. We still took
 consideration of small angle differences. A proportional control was used.
 
 <center><img src="assets/implementation/matrix.png" width="75%"></center>
 
-<center><img src="assets/implementation/control_2.png" width="100%"></center>
+<center><img src="assets/implementation/control_2.png" width="75%"></center>
 
 Near the goal position, the goal AR tag sometimes was covered by the TurtleBot.
 We assumed that the goal position could not change any more. Then, we solved it
@@ -123,6 +125,6 @@ certain times (i.e. 40 times). The other one was to modify the message received
 from vision. When the goal AR tag was not seen, assume the position was the same
 as the previous location.
 
-<center><img src="assets/implementation/control_3.png" width="100%"></center>
+<center><img src="assets/implementation/control_3.png" width="75%"></center>
 
 [(back to top)](#table-of-contents)
