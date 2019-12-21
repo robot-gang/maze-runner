@@ -5,11 +5,6 @@
 - Yuanrong Han
 - Son Tran
 
-# This is the codebase for the pacbot project
+# This is the codebase for the Maze Runner project
 
-# Design
-
-# Modules
-
-
-# Usages
+- Our website: [https://robot-gang.github.io/maze-runner/](https://robot-gang.github.io/maze-runner/)
