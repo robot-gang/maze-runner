@@ -20,8 +20,8 @@ permalink: /design
 
 ## Overview
 
-Because our goal from the beginning was to eventually make the path planning and control dynamic, we needed to constantly check the maze to see if the goal or the shortest path changed. At the general level, we decided to make a vision node, a planning node, and a control node. 
-- The **vision** node would continuously receive the video feed from the camera, process it into a maze, and publish the maze. This node would also calculate appropriate transforms and pixel positions for control and publish those too. 
+Because our goal from the beginning was to eventually make the path planning and control dynamic, we needed to constantly check the maze to see if the goal or the shortest path changed. At the general level, we decided to make a vision node, a planning node, and a control node.
+- The **vision** node would continuously receive the video feed from the camera, process it into a maze, and publish the maze. This node would also calculate appropriate transforms and pixel positions for control and publish those too.
 - The **planning** node would receive the maze and return a path through the maze.
 - The **control** node would use the information from both the planning and vision nodes to set waypoints for the robot to follow, and would publish velocities to help the robot reach the waypoints. This would allow the robot to solve the maze
 
@@ -75,7 +75,7 @@ The system for the computer vision is quite complicated, so a general outline of
     - If turtlebot drives and blocks a portion of the maze we knew prior, safest to assume it does not change as the Turtlebot blocks it from the camera's view.
     - If Turtlebot moves and no longer blocks part of the maze, we now know what that that part of the maze looks like, and there is not reason to make it uncertain.
     - Only change maze if someone alters the walls.
-15. Publish uncertain regions as 1 (wall). 
+15. Publish uncertain regions as 1 (wall).
     - Requires large assumption
 16. Get pixel position of goal, base of Turtlebot, and AR tag on turtlebot using TF and applying camera intrinsic matrix.
 17. Get transform between Turtlebot and Goal using TF.
@@ -85,7 +85,7 @@ The system for the computer vision is quite complicated, so a general outline of
 Explain general process for vision
 Notable things to talk about
 K-Means to find corners
-Segment turtlebot/AR tag 
+Segment turtlebot/AR tag
 Median Filter corners
 
 
@@ -119,7 +119,7 @@ The planner should be able to find the shortest path from the starting position 
 
 # Our Design and Decisions
 
-We used A* algorithm to compute the shortest path. There were two reasons to choose A*. First, A* is deterministic and optimal if the heuristic is consistent and admissible. Second, the computation is very fast when the TurtleBot maze configuration is small.  The heuristic was euclidean distance because diagonal motion was allowed.
+We used `A*` algorithm to compute the shortest path. There were two reasons to choose `A*`. First, `A*`is deterministic and optimal if the heuristic is consistent and admissible. Second, the computation is very fast when the TurtleBot maze configuration is small.  The heuristic was euclidean distance because diagonal motion was allowed.
 The core of control was a proportional controller. At each turning point of the path, the desired direction changed. Hence, turning to the desired angle prohibited the error accumulation.
 
 [(back to top)](#table-of-contents)
