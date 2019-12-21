@@ -4,10 +4,6 @@ title: Implementation
 permalink: /implementation
 ---
 
-## Overview the whole pipeline
-
-<img align="center" src="assets/system-diagram.jpg">
-
 ## Vision
 
 There were two AR tags, one will be on the TurtleBot, the other one will put in the maze. With the help of the camera on the side to provide information of the maze and the position of the TurtleBot and the goal by using both AR tags.
