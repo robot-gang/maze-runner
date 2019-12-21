@@ -21,7 +21,7 @@ This website is meant to document and showcase a final project for the introduct
 
 # What are we even doing?
 
-The original goal of our project was to do some cool pacman thing that involved multiple robots interacting with each other in a three-dimensional maze. The "Pacman" Turtlebot would use feedback from an external camera to explore the maze, while the "ghost" Turtlebots would use SLAM to navigate the level and search for "Pacman". 
+The original goal of our project was to do some cool pacman thing that involved multiple robots interacting with each other in a three-dimensional maze. The "Pac-Man" Turtlebot would use feedback from an external camera to explore the maze, while the "ghost" Turtlebots would use SLAM to navigate the level and search for "Pac-Man". 
 
 <center><img src="assets/introduction/pacman_goals.jpg" width="75%"></center>
 *<center><sub><sup>this is how it looked in my head i swear (<a href="https://www.createunsw.com.au/projects/pi-robotic-pacman/">source</a>)</sup></sub></center>*
@@ -39,7 +39,17 @@ A quick google search will tell you that there are many projects (so, so many) t
 
 Firstly, most projects that we managed to find online solve a carefully constructed maze in a highly-controlled environment (for instance white background, black walls, or wooden maze). Though our project has significant constraints on the environment (which will be explored on the "Design" page), all you really need to do to build a maze is lay out some high contrast paper on the ground. This is a relatively minor difference, but it allows a degree of portability that would not otherwise be possible.
 
+<center><img src="assets/introduction/controlled_maze.jpg" width="75%"></center>
+*<center><sub><sup>Carefully controlled background. Might be difficult to move/scale up.</sup></sub></center>*
+<center><img src="assets/introduction/paper_maze.png" width="75%"></center>
+*<center><sub><sup>Can literally just lay green paper wherever you want (kind of).</sup></sub></center>*
+
+
+
 Secondly, many (though not all) maze-solving robots work in an exploratory fashion. The robot navigates the maze, using cameras mounted on the robot itself, and builds an internal map to eventually reach the goal. While this approach has its own set of challenges and applications, our group elected to use an external camera to take in a video of the maze and solve it before sending control commands to the robot. In this approach, the robot does not waste any time exploring dead ends, and immediately follows the shortest path.
+
+<center><img src="assets/introduction/planning.png" width="75%"></center>
+*<center><sub><sup>Path is generated before the robot ever moves.</sup></sub></center>*
 
 Thirdly and finally, the Maze Runner Bot navigates the maze dynamically. This means that if the goal or maze changes, the robot should be able to react properly and still reach the goal (provided a path exists). As far as we could tell, most other projects do not do this. Having this dynamic control makes the problem significantly more challenging, as the robot needs to have a very precise notion of its location in the maze in order to not go through the walls of the maze or get stuck.
 
