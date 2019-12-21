@@ -9,7 +9,7 @@ Our project worked pretty well, and we were really happy that the demo worked.
 
 The main task was to find a path in a custom build maze with green construction paper.
 
-There were two AR tags, one will be on the Turtlebot, the other one will put in the maze. With the help of the camera on the side to provide information of the maze and the position of the Turtlebot and the goal by using both AR tags.
+There were two AR tags, one will be on the TurtleBot, the other one will put in the maze. With the help of the camera on the side to provide information of the maze and the position of the TurtleBot and the goal by using both AR tags.
 
 # Illustrate with pictures and at least one video.
 
