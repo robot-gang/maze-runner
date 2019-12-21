@@ -40,7 +40,7 @@ A quick google search will tell you that there are many projects (so, so many) t
 Firstly, most projects that we managed to find online solve a carefully constructed maze in a highly-controlled environment. Though our project has significant constraints on the environment (which will be explored on the "Design" page), all you really need to do to build a maze is lay out some high contrast paper on the ground. This is a relatively minor difference, but it allows a degree of portability that would not otherwise be possible.
 
 <center><img src="assets/introduction/controlled_maze.jpg" width="75%"></center>
-*<center><sub><sup>Carefully controlled background. Might be difficult to move/scale up.</sup></sub></center>*
+*<center><sub><sup>Carefully controlled background. Might be difficult to move/scale up. (<a href="https://www.youtube.com/watch?v=Jjuc5SBl25w">source</a>)</sup></sub></center>*
 <center><img src="assets/introduction/paper_maze.png" width="75%"></center>
 *<center><sub><sup>Can literally just lay green paper wherever you want (kind of).</sup></sub></center>*
 
