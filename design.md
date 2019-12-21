@@ -34,9 +34,13 @@ Because our goal from the beginning was to eventually make the path planning and
 
 ## Vision
 
+When we initially went about designing this project, we wanted to be super lazy about setting up our environment. Ideally we would have liked to have an overhead camera, but that was really difficult to do logistically and also kind of limiting. We also did not want spend a lot of time moving our camera to a "perfect" position, or spend a lot of time setting up the maze. As a result, the vision needed to be quite robust to changes in our setup. Because we also continuously ran the vision, it needed to be fast (work in realtime). While there were a few contraints we had to enforce on our setup, our group's design gave us a lot of freedom in setting up our maze.
+
 [(back to top)](#table-of-contents)
 
 # Our Design and Decisions
+
+
 
 [(back to top)](#table-of-contents)
 
