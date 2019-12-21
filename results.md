@@ -15,12 +15,12 @@ There were two AR tags, one will be on the Turtlebot, the other one will put in 
 
 Simple illustration: The yellow TurtleBot traverses the 5 x 6 maze with a fixed goal
 
-[![](http://img.youtube.com/vi/RFbh0e593M0/0.jpg)](http://www.youtube.com/watch?v=RFbh0e593M0 "The yellow TurtleBot traverses the 5 x 6 maze with a fixed goal")
-
-Computer screen while running
-
-[![](http://img.youtube.com/vi/-LFTzR53GEY/0.jpg)](http://www.youtube.com/watch?v=-LFTzR53GEY "The vision part and the computer screen when the code is running")
+<iframe width="720" height="480" src="https://www.youtube.com/embed/RFbh0e593M0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Simple illustration: The yellow TurtleBot successfully follows the goal with a dynamic path
 
-[![](http://img.youtube.com/vi/JbBiYivsCgs/0.jpg)](http://www.youtube.com/watch?v=JbBiYivsCgs "The yellow TurtleBot successfully follows the goal with a dynamic path")
+<iframe width="720" height="480" src="https://www.youtube.com/embed/JbBiYivsCgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Computer screen while running
+
+<iframe width="720" height="480" src="https://www.youtube.com/embed/-LFTzR53GEY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
