@@ -42,7 +42,7 @@ IMPORTANT NOTE: The images here were captured before the segmentation of the AR 
 3. Detect potential clusters of corners in segmented image, and refine them to get corner pixels.
 
     <p style="margin-bottom: 10px">
-    <center><img src="assets/implementation/actual_corners.png" width="75%"></center>
+    <center><img src="assets/implementation/rough_corners.png" width="75%"></center>
     </p>
 
 4. Use K-means clustering on convex hull of corners to separate points into four groupings.
@@ -51,11 +51,14 @@ IMPORTANT NOTE: The images here were captured before the segmentation of the AR 
     - Difficult to find a good method to classify outermost corners of maze after classification.
     - Becomes easier to find a method if we only consider clusters in a local region.
     - K-means allows a flexible way to split the maze into four quadrants, regardless of the camera’s position or orientation.
-5. In each cluster, pick point that is furthest away from center of convex hull of points.
-
+    
     <center><img src="assets/design/kmeans.png" width="75%"></center>
 
+5. In each cluster, pick point that is furthest away from center of convex hull of points.
 6. Have (ideally) found four corners of a rectangle, apply median filter to corners to reduce chance of outliers.
+
+    <center><img src="assets/implementation/actual_corners.png" width="75%"></center>
+
 7. Find maximum bounding rectangle
 8. Retrieve perspective transform matrix, and apply to segmented image and original image.
 9. Segment turtlebot in the transformed original image.
