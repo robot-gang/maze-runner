@@ -8,11 +8,16 @@ permalink: /results
 
 Our project worked pretty well, and we were really happy that the demo worked.
 
-The main task was to find a path in a custom build maze with green construction paper.
+The main task was to find a path in a custom build maze with green construction
+paper.
 
-There were two AR tags, one will be on the TurtleBot, the other one will put in the maze. With the help of the camera on the side to provide information of the maze and the position of the TurtleBot and the goal by using both AR tags.
+There were two AR tags, one will be on the TurtleBot, the other one will put in
+the maze. With the help of the camera on the side to provide information of the
+maze and the position of the TurtleBot and the goal by using both AR tags.
 
-After integration, the TurtleBot is able to find the shortest path from the starting point to the goal and moves to the goal in many different settings of the maze.
+After integration, the TurtleBot is able to find the shortest path from the
+starting point to the goal and moves to the goal in many different settings of
+the maze.
 
 ## Demo videos
 
