@@ -9,7 +9,7 @@ title: Introduction
 <link href="assets/stylesheets/main.css" rel="stylesheet">
 # <span class="rainbow"> Welcome to the Maze Runner Bot Website! </span>
 
-This website is meant to document and showcase a final project for the introductory robotics course (EEC106A) at UC Berkeley. This page provides a general summary of the project.
+This website is meant to document and showcase a final project for the introductory robotics course (EEC106A) at UC Berkeley. This page provides a general introduction and summary of the project.
 
 ---
 # Table of Contents
@@ -27,7 +27,7 @@ The original goal of our project was to do some cool pacman thing that involved 
 *<center><sub><sup>this is how it looked in my head i swear (<a href="https://www.createunsw.com.au/projects/pi-robotic-pacman/">source</a>)</sup></sub></center>*
 
 
-We broke the problem down into several small milestones,and came up with a timeline to accomplish them. However, once we seriously started working on the project, we realized that our original objective was sort of way too hard for us. In hindsight we were probably a tiny bit too optimistic about the speed in which we would be able to accomplish these milestones, especially since none of us had any experience working on robotics-related projects prior to this class. As a result we scaled the project down to our first milestone: **<u>Having a Turtlebot follow a constrained path to a goal in a two-dimensional maze, using video feedback from an external camera mounted on a tripod.</u>** Additionally, we required that the robot should dynamically respond to changes in the goal and changes in the maze. Finally we wanted the robot to be unaffected by any movement in the external camera (provided the entire maze + robot was still being captured in the view of the camera).
+We broke the problem down into several small milestones, and came up with a timeline to accomplish them. However, once we seriously started working on the project, we realized that our original objective was sort of way too difficult for us to complete in the allotted time. As a result we scaled the project down to our first milestone: **<u>Having a Turtlebot follow a constrained path to a goal in a two-dimensional maze, using video feedback from an external camera.</u>** Additionally, we required that the robot should dynamically respond to changes in the goal and changes in the maze. Finally we wanted the robot to be unaffected by any movement in the external camera (provided the entire maze + robot was still being captured in the view of the camera).
 
 <center><img src="assets/introduction/intro_maze_runner.png" width="75%"></center>
 *<center><sub><sup>expectation vs reality</sup></sub></center>*
@@ -35,7 +35,19 @@ We broke the problem down into several small milestones,and came up with a timel
 [(back to top)](#table-of-contents)
 
 # Why do we even care?
+A quick google search will tell you that there are many projects (so, so many) that have a robot navigate a maze. So what makes our project different? There are three main things that make our project stand out. 
+
+Firstly, most projects that we managed to find online solve a carefully constructed maze in a highly-controlled environment (for instance white background, black walls, or wooden maze). Though our project has significant constraints on the environment (which will be explored on the "Design" page), all you really need to do to build a maze is lay out some high contrast paper on the ground. This is a relatively minor difference, but it allows a degree of portability that would not otherwise be possible.
+
+Secondly, many (though not all) maze-solving robots work in an exploratory fashion. The robot navigates the maze, using cameras mounted on the robot itself, and builds an internal map to eventually reach the goal. While this approach has its own set of challenges and applications, our group elected to use an external camera to take in a video of the maze and solve it before sending control commands to the robot. In this approach, the robot does not waste any time exploring dead ends, and immediately follows the shortest path.
+
+Thirdly and finally, the Maze Runner Bot navigates the maze dynamically. This means that if the goal or maze changes, the robot should be able to react properly and still reach the goal (provided a path exists). As far as we could tell, most other projects do not do this. Having this dynamic control makes the problem significantly more challenging, as the robot needs to have a very precise notion of its location in the maze in order to not go through the walls of the maze or get stuck.
+
 [(back to top)](#table-of-contents)
 
 # How the heck is this even useful?
+
+In terms of real world application, a possible use of our project (with some serious adjustments and further research) would be to have robots navigate in a warehouse, using high-contrast markers on the floor and a series of cameras mounted in different locations, towards a variety of goals.
+
+
 [(back to top)](#table-of-contents)
