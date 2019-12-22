@@ -12,7 +12,7 @@ permalink: /team
 Son is an EECS student with a background in algorithms, robotics, and artificial intelligence. He has taken/is taking CS170, CS188, EE127, CS61 series as well as the EE16 series.
 <br><br>
 
-The main contributions of Son were towards implementing the planner and controller for the TurtleBot. He additionally worked on the overall system design and helped to handle git, GitHub, and GitHub Pages.
+The main contributions of Son were implementing the planner and controller for the TurtleBot. He additionally worked on the overall system design and helped to handle git, GitHub, and GitHub Pages.
 </p>
 
 
@@ -24,7 +24,7 @@ The main contributions of Son were towards implementing the planner and controll
 Zuyong is an EECS senior student with a background in algorithms, and artificial intelligence. He has taken CS61 series, EE16 series, CS170, CS188, CS189, and EE120.
 <br><br>
 
-The main contributions of Zuyong were to design and implement the planner and controller for this project. He also worked on debugging and gave feedbacks and suggestions/requests of the output of vision.
+The main contributions of Zuyong were designing and implementing the planner and controller for this project. He also worked on debugging and gave feedback and suggestions/requests for the output of vision.
 </p>
 
 
@@ -36,7 +36,7 @@ The main contributions of Zuyong were to design and implement the planner and co
 Yuanrong(Rex) is a student at UC Berkeley studying EECS. He has taken all EE16 series and CS61 series, and also EE120 and took EE 106A in fall 2019.
 <br><br>
 
-The main contributions of Yuanrong(Rex) were design vision for this project mostly implemented by Shawn. He helped debug for both vision part and controller part for this project, and he also helped to develop GitHub Pages with Son.
+The main contributions of Yuanrong(Rex) were designing the vision for this project, which was mostly implemented by Shawn. He helped debug for both the vision and control, and he also helped develop the GitHub Pages website with Son.
 </p>
 
 
@@ -48,5 +48,5 @@ The main contributions of Yuanrong(Rex) were design vision for this project most
 Shawn Shacterman is an EECS genius superstar. He has taken at least 3 whole EE/CS classes, including CS 189, CS 61A, and EE 16A.
 <br><br>
 
-Shawn's main role for the project was designing and implementing the vision for the project with Rex, and ignoring all of Zuyong's suggestions/requests.
+Shawn's main role for the project was designing and implementing the vision with Rex, and ignoring all of Zuyong's suggestions/requests.
 </p>
